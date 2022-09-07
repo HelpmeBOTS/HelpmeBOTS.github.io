@@ -742,10 +742,6 @@ async function __uvHook(window, config = {}, bare = '/bare/') {
             })),
         ];
 
-        //event.data.url = (__uv.bare.protocol === 'https:' ? 'wss://' : 'ws://') + __uv.bare.host + '/client/?ws='+remote.protocol+'//'+remote.host+remote.path+'&origin='+__uv.meta.url.origin;
-
-      //console.log(event.data.url)
-
         const ws = new event.target(event.data.url, event.data.protocols);
 
         client.nativeMethods.defineProperty(ws, methodPrefix + 'url', {

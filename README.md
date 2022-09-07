@@ -1,14 +1,30 @@
-# Ludi
-The Ludicrous Web Proxy Site: Fast, Simple, Small. The flagship site of Ludicrous
+# ultraviolet-scripts
+Core Ultraviolet scripts
 
-## Installation
+# Configuration
+Configure Ultraviolet for both client-hooking & service worker in `uv.config.js`
+```javascript
+self.__uv$config = {
+    bare: '/bare/',
+    prefix: '/service/',
+    encodeUrl: Ultraviolet.codec.xor.encode,
+    decodeUrl: Ultraviolet.codec.xor.decode,
+    handler: '/uv.handler.js',
+    bundle: '/uv.bundle.js',
+    config: '/uv.config.js',
+};
+```
 
-```console
-git clone https://github.com/LudicrousDevelopment/Ludi
 
-cd Ludi
+# Example Usage
+```javascript
+importScripts('/PATHTOSCRIPTS/uv.sw.js');
 
-npm install
+const sw = new UVServiceWorker();
 
-node index
+self.addEventListener('fetch', event =>
+    event.respondWith(
+        sw.fetch(event)
+    )
+);
 ```
